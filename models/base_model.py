@@ -9,7 +9,7 @@ class BaseModel:
         """method used to assign uuid when an instance is created"""
         time_format = "%y-%m-%dT%H:%M%s.%f"
         if kwargs:
-            for key,value in kwargs.item:
+            for key,value in kwargs.item():
                 if key == '__class__':
                     continue
                 elif key == 'created_at' or key == 'updated_at':
