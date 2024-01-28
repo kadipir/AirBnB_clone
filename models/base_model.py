@@ -10,9 +10,9 @@ class BaseModel:
         time_format = "%y-%m-%dT%H:%M%s.%f"
         if kwargs:
             for key,value in kwargs.item():
-                if key == '__class__':
+                if key == "__class__":
                     continue
-                elif key == 'created_at' or key == 'updated_at':
+                elif key == "created_at" or key == "updated_at":
                     setattr(self, key ,datetime.strptime(value,time_format))
                 else:
                     setattr(self, key.value)
