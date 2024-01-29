@@ -35,7 +35,7 @@ class test_FileStorage(unittest.TestCase):
         """test for creation and storing new objects"""
         obj = BaseModel()
         models.storage.new(obj)
-        self.assertIn("BaseMOdel.{}".format(obj.id),models.storage.all())
+        self.assertIn("BaseModel.{}".format(obj.id),models.storage.all())
     def test_save_and_reload(self):  
         obj1 = BaseModel()
         obj2 = BaseModel()
@@ -45,13 +45,13 @@ class test_FileStorage(unittest.TestCase):
         #create new storage to simulate reloading"""
         new_storage = FileStorage()
         new_storage.reload()
-        self.assertTrue(new_storage.all().get("Basemodel.{}".format(obj1.id)) is not None)
-        self.assertTrue(new_storage.all().get("Basemodel.{}".format(obj2.id)) is not None)
+        self.assertTrue(new_storage.all().get("BaseModel.{}".format(obj1.id)) is not None)
+        self.assertTrue(new_storage.all().get("BaseModel.{}".format(obj2.id)) is not None)
     def test_save_to_file(self):
         obj = BaseModel()
         models.storage.new(obj)
         models.storage.save()
-        self.assertTrue(os.path.exists(models.storage.__file_path))
+        self.assertTrue(os.path.exists(models.storage._FileStorage__file_path))
 if __name__ == "__main__":
     unittest.main
 
