@@ -16,7 +16,7 @@ class FileStorage:
         adds objects into the empty dictionary __objects
         """
         obj_cls_name = obj.__class__.__name__
-        key = "{}.{}".format(obj_cla_name,obj.id)
+        key = "{}.{}".format(obj_cls_name,obj.id)
         FileStorage.__objects[key] = obj
 
     def all(self):
@@ -30,11 +30,11 @@ class FileStorage:
         obj_dict = {}
         for obj in all_objs.keys():
             obj_dict[obj] = all_objs[obj].to_dict()
-        with open(FileStorage.__filepath,"w",encoding = "utf-8") as file:
+        with open(FileStorage.__file_path,"w",encoding = "utf-8") as file:
             json.dump(obj_dict,file)
 
     def reload(self):
-        if os.path.isFile(FileStorage.__file_path):
+        if os.path.isfile(FileStorage.__file_path):
             with open(FileStorage.__file_path,"r",encoding = "utf-8") as file:
                 try:
                     obj_dict = json.load(file)
