@@ -88,7 +88,7 @@ class HBNBCommand(cmd.Cmd):
          instances based or not on the class name.
         """
         objects = storage.all()
-        commands = shlef.splits(arg)
+        commands = shlex.split(arg)
         if len(commands) == 0:
            for key, value in objects.items():
               print(str(value))
