@@ -13,7 +13,7 @@ class HBNBCommand(cmd.Cmd):
          """
          return True
 
-    def help_quit(self):
+    def help_quit(self,arg):
          """
          documents the function of quit
          """
