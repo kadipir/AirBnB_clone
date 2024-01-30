@@ -37,12 +37,12 @@ class HBNBCommand(cmd.Cmd):
         commands = shlex.split(arg)
         if len(commands) == 0:
             print("** class name missing **")
-        elif command[0] not in self.valid_class:
+        elif commands[0] not in self.valid_class:
             print("** class doesn't exist **")
         else:
             new_instance = BaseModel()
             new_instance.save()
-            print("new_instance.id")
+            print(new_instance.id)
 
     def do_show(self,arg):
         """
@@ -67,10 +67,10 @@ class HBNBCommand(cmd.Cmd):
         """
         Deletes an instance based on the class name and id
         """
-        commands == shlex.split(arg)
+        commands = shlex.split(arg)
         if len(commands) == 0:
             print("** class name missing **")
-        elif commands[0] not in valid_class:
+        elif commands[0] not in self.valid_class:
             print("** class doesn't exist ** ")
         elif len(commands) < 2:
             print("** instance id missing **")
