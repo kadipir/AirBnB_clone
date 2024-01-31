@@ -6,12 +6,13 @@ import cmd
 import shlex
 from models.base_model import BaseModel
 from models import storage
+from model.user import User
 class HBNBCommand(cmd.Cmd):
     """
     class used to create the console
     """
     prompt = "(hbnb)"
-    valid_class = ["BaseModel"]
+    valid_class = ["BaseModel","User"]
     def do_quit(self,arg):
          """
          command to exit the program
@@ -40,8 +41,8 @@ class HBNBCommand(cmd.Cmd):
         elif commands[0] not in self.valid_class:
             print("** class doesn't exist **")
         else:
-            new_instance = BaseModel()
-            new_instance.save()
+            new_instance = eval("f{command[0]}()")
+            storage.save()
             print(new_instance.id)
 
     def do_show(self,arg):
