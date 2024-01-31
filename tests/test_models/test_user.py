@@ -45,7 +45,7 @@ class test_user(unittest.TestCase):
         self.assertIn("Tim", user_str)
         self.assertIn("root", user_str)
 
-    def_test_user_to_dict(self):
+    def test_user_to_dict(self):
         test_user = User()
         test_user.email = "john@gmail.com"
         test_user.first_name = "John"
@@ -56,7 +56,7 @@ class test_user(unittest.TestCase):
         self.assertEqual(user_dict["email"], "john@gmail.com")
         self.assertEqual(user_dict["password"], "root")
         self.assertEqual(user_dict["first_name"], "John")
-        self.assertEqual(user_dict["last_name"], "tim")
+        self.assertEqual(user_dict["last_name"], "Tim")
 
     def test_user_instance_creation(self):
         test_user = User(email = "john@gmail.com" ,first_name = "John", last_name = "Tim", password = "root")
@@ -71,7 +71,7 @@ class test_user(unittest.TestCase):
         self.assertEqual(user_dict["email"], "john@gmail.com")
         self.assertEqual(user_dict["password"], "root")
         self.assertEqual(user_dict["first_name"], "John")
-        self.assertEqual(user_dict["last_name"], "tim")
+        self.assertEqual(user_dict["last_name"], "Tim")
 
     def test_user_id_generation(self):
         test_user = User()
