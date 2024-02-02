@@ -6,13 +6,14 @@ import cmd
 import shlex
 from models.base_model import BaseModel
 from models import storage
-from model.user import User
+from models.user import User
+from models.city import City
 class HBNBCommand(cmd.Cmd):
     """
     class used to create the console
     """
     prompt = "(hbnb)"
-    valid_class = ["BaseModel","User"]
+    valid_class = ["BaseModel","User","State","City","Amenity","Place","Review"]
     def do_quit(self,arg):
          """
          command to exit the program
