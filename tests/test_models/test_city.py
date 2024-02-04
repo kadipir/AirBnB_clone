@@ -16,6 +16,10 @@ class TestEmptyStringCity(unittest.TestCase):
         self.assertEqual(City.state_id, "")
         self.assertEqual(City.name, "")
 
+class TestSubClassCity(unittest.TestCase):
+    self.assertTrue(issubclass(City, console))
+    self.assertTrue(issubclass(city, FileStorage))
+
 if __name__ == "__main__":
     unittest.main()
 

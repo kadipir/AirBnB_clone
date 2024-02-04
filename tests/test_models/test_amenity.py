@@ -17,6 +17,9 @@ class TestEmptyClassAttributeAmenity(unittest.TestCase):
 if __name__ == "__main__":
     unittest.main()
 
+class TestSubclassAmenity(self):
+    self.assertTrue(issubclass(amenity, console))
+
 
 
 
