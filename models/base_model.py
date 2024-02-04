@@ -4,7 +4,7 @@
 import models
 from datetime import datetime
 import uuid
-from models.user import User
+
 
 class BaseModel:
     """this is a class that defines all common attributes of other classes"""
