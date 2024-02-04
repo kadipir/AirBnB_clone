@@ -10,7 +10,7 @@ from models.user import User
 from models.city import City
 from models.amenity import Amenity
 from models.place import Place
-from models.State import state
+from models.State import State
 class HBNBCommand(cmd.Cmd):
     """
     class used to create the console
