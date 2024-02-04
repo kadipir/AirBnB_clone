@@ -11,6 +11,8 @@ from models.city import City
 from models.amenity import Amenity
 from models.place import Place
 from models.State import State
+from  models.review import Review
+
 class HBNBCommand(cmd.Cmd):
     """
     class used to create the console
