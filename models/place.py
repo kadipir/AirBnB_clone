@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 """Defines the Place class."""
 from models.base_model import BaseModel
-
+import console.py
 
 class Place(BaseModel):
-    """Represent a place.
+    """Represent a place."""
 
     Attributes:
         city_id (str): The City id.
