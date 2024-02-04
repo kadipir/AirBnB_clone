@@ -2,6 +2,7 @@
 """
 test for city
 """
+import models
 import unittest
 from models.city import City
 class TestEmptyStringCity(unittest.TestCase):
@@ -12,8 +13,8 @@ class TestEmptyStringCity(unittest.TestCase):
         """
         test empty class attribute
         """
-        self.assertEqual(State.state_id, "")
-        self.assertEqual(State.name, "")
+        self.assertEqual(City.state_id, "")
+        self.assertEqual(City.name, "")
 
 if __name__ == "__main__":
     unittest.main()

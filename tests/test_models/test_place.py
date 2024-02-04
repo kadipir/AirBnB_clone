@@ -2,6 +2,7 @@
 """
 program to test file place.py
 """
+import models
 import unittest
 from models.place import Place
 

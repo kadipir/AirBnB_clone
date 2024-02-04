@@ -23,10 +23,10 @@ class test_user(unittest.TestCase):
         #create new user instance
         test_user = User()
         #check if the class atttr are empty
-        self.assertEqual(test_user.email, " ")
-        self.assertEqual(test_user.password, " ")
-        self.assertEqual(test_user.first_name, " ")
-        self.assertEqual(test_user.last_name, " ")
+        self.assertEqual(test_user.email, "")
+        self.assertEqual(test_user.password, "")
+        self.assertEqual(test_user.first_name, "")
+        self.assertEqual(test_user.last_name, "")
 
     def test_user_inherits_from_BaseModel(self):
         test_user = User()

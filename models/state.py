@@ -1,4 +1,4 @@
 #!/usr/bin/bash
-from models.base_model imort BaseModel
-class state(BaseModel):
+from models.base_model import BaseModel
+class State(BaseModel):
     name = ""

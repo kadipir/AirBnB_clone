@@ -2,6 +2,7 @@
 """
 program used to test for file review.py
 """
+import models
 import unittest
 from models.review import Review
 class TestEmptyAttributeReview(unittest.TestCase):
