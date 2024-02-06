@@ -96,6 +96,7 @@ class HBNBCommand(cmd.Cmd):
         """
         objects = storage.all()
         commands = shlex.split(arg)
+        print(f"{commands = }")
         if len(commands) == 0:
            for key, value in objects.items():
               print(str(value))
@@ -105,6 +106,29 @@ class HBNBCommand(cmd.Cmd):
            for key,value in objects.items():
               if key.split('.')[0] == commands[0]:
                    print(str(value))
+
+    def default(self, arg):
+        """
+        default behavior for cmd module for invalid syntax
+        """
+        arg_list = arg.split(".")
+        print(f"{arg_list = }")
+        incoming_class_name = arg_list[0]
+        print(f"{incoming_class_name = }")
+        command = arg_list.split("(")
+        incoming_method = command[0]
+        print(f"{incoming_method = }")
+        method_dict = {"all" : self.do_all,
+                "show" : self.do_show,
+                "destroy" : self.do_destroy,
+                "update" : self.do_update
+                }
+        if incoming_method in method_dict.keys():
+            return method_dict[incoming_method]("{} {}".format(incoming_class_name, "")
+        print("***syntax error: {}".format(arg))
+        return False
+
+
     def do_update(self,arg):
         commands = shlex.split(args)
         if len(commands) == 0:
