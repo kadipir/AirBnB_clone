@@ -47,7 +47,7 @@ class HBNBCommand(cmd.Cmd):
         elif commands[0] not in self.valid_class:
             print("** class doesn't exist **")
         else:
-            new_instance = eval(f"{command[0]}()")
+            new_instance = eval(f"{commands[0]}()")
             storage.save()
             print(new_instance.id)
 
@@ -95,8 +95,8 @@ class HBNBCommand(cmd.Cmd):
          instances based or not on the class name.
         """
         objects = storage.all()
-        commands = shlex.split(arg)
-        print(f"{commands = }")
+        commands = shlex.split(arg)      
+
         if len(commands) == 0:
            for key, value in objects.items():
               print(str(value))
@@ -123,7 +123,7 @@ class HBNBCommand(cmd.Cmd):
                 "show" : self.do_show,
                 "destroy" : self.do_destroy,
                 "update" : self.do_update
-        }
+               }
         if incoming_method in method_dict.keys():
             return method_dict[incoming_method]("{} {}".format(incoming_class_name,""))
         print("***syntax error: {}".format(arg))
