@@ -115,19 +115,19 @@ class HBNBCommand(cmd.Cmd):
         print(f"{arg_list = }")
         incoming_class_name = arg_list[0]
         print(f"{incoming_class_name = }")
-        command = arg_list.split("(")
+        command = arg_list[1].split("(")
         incoming_method = command[0]
         print(f"{incoming_method = }")
-        method_dict = {"all" : self.do_all,
+        method_dict = {
+                "all" : self.do_all,
                 "show" : self.do_show,
                 "destroy" : self.do_destroy,
                 "update" : self.do_update
-                }
+        }
         if incoming_method in method_dict.keys():
-            return method_dict[incoming_method]("{} {}".format(incoming_class_name, "")
+            return method_dict[incoming_method]("{} {}".format(incoming_class_name,""))
         print("***syntax error: {}".format(arg))
         return False
-
 
     def do_update(self,arg):
         commands = shlex.split(args)
