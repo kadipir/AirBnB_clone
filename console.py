@@ -119,6 +119,7 @@ class HBNBCommand(cmd.Cmd):
         incoming_method = command[0]
         print(f"{incoming_method = }")
         method_dict = {
+                "count": self.do_count,
                 "all" : self.do_all,
                 "show" : self.do_show,
                 "destroy" : self.do_destroy,
@@ -128,6 +129,24 @@ class HBNBCommand(cmd.Cmd):
             return method_dict[incoming_method]("{} {}".format(incoming_class_name,""))
         print("***syntax error: {}".format(arg))
         return False
+
+    def do_count(self, arg):
+        """
+        counts and retrieves the number of instances of a class
+        """
+        objects = storage.all()
+        commands = shlex.split(arg)
+        incoming_class_name = commands[0]
+        count = 0
+        if commands:
+            if incoming_class_name in self.valid_class:
+                for obj in objects.values():
+                    if obj.__class__.__name__ == incoming_class_name:
+                        count += 1
+            else:
+               print("**invalid class name**")
+        else:
+           print("**invalid class name**")
 
     def do_update(self,arg):
         commands = shlex.split(args)
