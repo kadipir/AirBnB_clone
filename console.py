@@ -136,17 +136,19 @@ class HBNBCommand(cmd.Cmd):
         """
         objects = storage.all()
         commands = shlex.split(arg)
-        incoming_class_name = commands[0]
+        if arg:
+           incoming_class_name = commands[0]
         count = 0
         if commands:
             if incoming_class_name in self.valid_class:
                 for obj in objects.values():
                     if obj.__class__.__name__ == incoming_class_name:
                         count += 1
+                    print(count)
             else:
                print("**invalid class name**")
         else:
-           print("**invalid class name**")
+            print("**class name missing**")
 
     def do_update(self,arg):
         commands = shlex.split(args)
