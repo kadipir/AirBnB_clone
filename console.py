@@ -151,18 +151,18 @@ class HBNBCommand(cmd.Cmd):
     def do_update(self,arg):
         commands = shlex.split(args)
         if len(commands) == 0:
-           print(" ** class name missing ** ")
+           print("** class name missing **")
         elif commands[0] not in valid_class:
             print("** class doesn't exist **")
         elif len(commands) < 2:
-            print(" ** instance id missing **")
+            print("** instance id missing **")
         else:
             objects = storage.all()
             key = "{}.{}".format(commands[0],commands[1])
             if key not in objects:
                 print("** no instance found **")
             elif len(commands) < 3:
-                print("** attribute name missing ** (")
+                print("** attribute name missing **")
             elif len(commands) < 4:
                 print("** value missing **")
             else:
