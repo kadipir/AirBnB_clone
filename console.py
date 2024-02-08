@@ -87,7 +87,7 @@ class HBNBCommand(cmd.Cmd):
             if key in objects:
                 del(objects[key])
             else:
-                print("** no instance found ** ")
+                print("** no instance found **")
 
     def do_all(self,arg):
         """
