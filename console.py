@@ -112,12 +112,9 @@ class HBNBCommand(cmd.Cmd):
         default behavior for cmd module for invalid syntax
         """
         arg_list = arg.split(".")
-        print(f"{arg_list = }")
         incoming_class_name = arg_list[0]
-        print(f"{incoming_class_name = }")
         command = arg_list[1].split("(")
         incoming_method = command[0]
-        print(f"{incoming_method = }")
         incoming_extra_arg = command[1].split(")")[0]
         method_dict = {
                 "count": self.do_count,
