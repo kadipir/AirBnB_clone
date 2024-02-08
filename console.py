@@ -116,6 +116,7 @@ class HBNBCommand(cmd.Cmd):
         command = arg_list[1].split("(")
         incoming_method = command[0]
         incoming_extra_arg = command[1].split(")")[0]
+        all_args = incoming_extra_arg.split(",")
         method_dict = {
                 "count": self.do_count,
                 "all" : self.do_all,
@@ -124,7 +125,13 @@ class HBNBCommand(cmd.Cmd):
                 "update" : self.do_update
                }
         if incoming_method in method_dict.keys():
-            return method_dict[incoming_method]("{} {}".format(incoming_class_name,incoming_extra_arg))
+            if incoming_method != "update":
+                return method_dict[incoming_method]("{} {}".format(incoming_class_name,incoming_extra_arg))
+            else:
+                obj_id = all_args[0]
+                attribute_name = all_args[1]
+                attribute_value = all_args[2]
+                return method_dict[incoming_method]("{} {} {} {}".format(incoming_class_name, obj_id, attribute_name, attribute_value))
         print("***syntax error: {}".format(arg))
         return False
 
@@ -144,15 +151,15 @@ class HBNBCommand(cmd.Cmd):
                         count += 1
                     print(count)
             else:
-               print("**invalid class name**")
+               print("** class doesn't exist **")
         else:
-            print("**class name missing**")
+            print("** class name missing **")
 
     def do_update(self,arg):
-        commands = shlex.split(args)
+        commands = shlex.split(arg)
         if len(commands) == 0:
            print("** class name missing **")
-        elif commands[0] not in valid_class:
+        elif commands[0] not in self.valid_class:
             print("** class doesn't exist **")
         elif len(commands) < 2:
             print("** instance id missing **")
