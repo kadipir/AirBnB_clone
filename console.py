@@ -2,6 +2,8 @@
 """
 update on the console to increase its functionality
 """
+import ast
+import re
 import cmd
 import shlex
 from models.base_model import BaseModel
@@ -116,7 +118,6 @@ class HBNBCommand(cmd.Cmd):
         command = arg_list[1].split("(")
         incoming_method = command[0]
         incoming_extra_arg = command[1].split(")")[0]
-        all_args = incoming_extra_arg.split(",")
         method_dict = {
                 "count": self.do_count,
                 "all" : self.do_all,
@@ -128,14 +129,17 @@ class HBNBCommand(cmd.Cmd):
             if incoming_method != "update":
                 return method_dict[incoming_method]("{} {}".format(incoming_class_name,incoming_extra_arg))
             else:
-                obj_id = all_args[0]
-                attribute_name = all_args[1]
-                attribute_value = all_args[2]
-                return method_dict[incoming_method]("{} {} {} {}".format(incoming_class_name, obj_id, attribute_name, attribute_value))
-        print("***syntax error: {}".format(arg))
-        return False
+                obj_id , arg_dict = split_curly_braces(incoming_extra_arg)
+                try:
+                    if isinstance(arg_dict, str):
+                        attributes = arg_dict
+                        return method_dict[incoming_method]("{} {} {} {}".format(incoming_class_name,obj_id, attributes))
+                    elif isinstance(arg_dict, dict):
+                        dict_atrributes = arg_dict
+                        return method_dict[incoming_method]("{} {} {} {}".format(incoming_class_name, obj_id, dict_atrributes))
 
     def do_count(self, arg):
+
         """
         counts and retrieves the number of instances of a class
         """
@@ -154,6 +158,29 @@ class HBNBCommand(cmd.Cmd):
                print("** class doesn't exist **")
         else:
             print("** class name missing **")
+
+    
+    def split_curly_braces(incoming_extra_arg):
+        curly_braces = re.search(r"\{(.*?)\}", incoming_extra_arg)
+        if curly_braces:
+            id_with_comma = shlex.split(incoming_extra_arg[:curly_braces.span()[0]])
+            id = [i.strip(",")for i in id_with_comma][0]
+            str_data = curly_braces.group(1)
+            try:
+                arg_dict = ast.literal_eval("{" + str_data + "}")
+            except Exception:
+                print("** Invalid dictionary format **")
+                return
+            return id, arg_dict
+        else:
+            commands = incoming_extra_arg.split(",")
+            try:
+                id = commands[0]
+                attr_name = commands[1]
+                attr_val = commnads[2]
+                return f"{id}", f"{attr_name} {attr_val}"
+            except Exception:
+                print("** argument missing **")
 
     def do_update(self,arg):
         commands = shlex.split(arg)
@@ -174,13 +201,24 @@ class HBNBCommand(cmd.Cmd):
                 print("** value missing **")
             else:
                 obj = objects[key]
-                attribute_name = commands[2]
-                attribute_value = commands[3]
-                try:
-                    attribute_value = eval(attribute_value)
-                except Exception:
-                    pass
-                setattr(obj,attribute_name,attribute_value)
+                curly_braces = re.search(r"\{(.*?)\}", arg)
+                if curly_braces:
+                    str_data = curly_braces.group(1)
+                    arg_dict = ast.literal_eval("{" + str_data + "}")
+                    attr_names = list(arg_dict.keys())
+                    attr_values = list(arg_dict.values())
+                    atribute_name1 = attr_names[0]
+                    attribute_name2 = attr_names[1]
+                    attribute_value1 = attr_values[0]
+                    attribute_value1 = attr_values[1]
+                else:
+                  attribute_name = commands[2]
+                  attribute_value = commands[3]
+                  try:
+                      attribute_value = eval(attribute_value)
+                  except Exception:
+                      pass
+                  setattr(obj,attribute_name,attribute_value)
                 obj.save()
 
 
